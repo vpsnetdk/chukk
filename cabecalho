@@ -1,8 +1,4 @@
 #!/bin/bash
-[[ -e "$(pwd)/msg" ]] && source msg
-
-kska(){
-# -*- ENCODING: UTF-8 -*-
 dropbear_pids () {
   port_dropbear=`ps aux|grep 'dropbear'|awk NR==1|awk '{print $17;}'`
   log=/var/log/auth.log
@@ -68,6 +64,7 @@ _userlock="${i}"
 _tuser="\033[1;31m$(echo -e "${users}" | wc -l)"
 }
 
+[[ -e /etc/adm-lite/modulos ]] && function_onlines &> /dev/null 
 
 if ! [ $(id -u) = 0 ]; then
 clear
@@ -88,6 +85,7 @@ clear
 fi
 ##
 # Funcoes Globais
+[[ -e /bin/ejecutar/msg ]] && source /bin/ejecutar/msg || source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/msg-bar/msg)
 
 #FIN DE MODULOS A ELIMINAR EN UPDATE CON REFORMA EN BASE	
 remover_adm () {
@@ -333,6 +331,46 @@ meu_ip () {
   fi
 }
 
+ofus () {
+unset txtofus
+number=$(expr length $1)
+for((i=1; i<$number+1; i++)); do
+txt[$i]=$(echo "$1" | cut -b $i)
+case ${txt[$i]} in
+".") txt[$i]="x";;
+"x") txt[$i]=".";;
+"5") txt[$i]="s";;
+"s") txt[$i]="5";;
+"1") txt[$i]="@";;
+"@") txt[$i]="1";;
+"2") txt[$i]="?";;
+"?") txt[$i]="2";;
+"4") txt[$i]="0";;
+"0") txt[$i]="4";;
+"/") txt[$i]="K";;
+"K") txt[$i]="/";;
+esac
+txtofus+="${txt[$i]}"
+done
+echo "$txtofus" | rev
+}
+ 
+
+fun_atualizar () {
+clear&&clear
+#upFILE=$(curl -sSL "https://www.dropbox.com/s/uyyme71yu6942vb/update.txt") 
+#echo -e "$upFILE"
+msg -bar3
+cd /etc/adm-lite
+chmod 777 ./*
+echo -e "${cor[3]} ¿DESEAS CONTINUAR CON UPDATE DEL SCRIPT ? "
+read -p " [S/N]: " -e -i s sshsn
+[[ "$sshsn" = @(s|S|y|Y) ]] && {
+source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/cabecalho/updateadm) "alx"
+exit&&exit
+}
+#read -p " PRESIONA ENTER PARA CONTINUAR !!"
+}
 
 #GERA NOVO CLIENTE
 newclient () {
@@ -562,4 +600,3 @@ export -f fun_atualizar
 export -f select_users
 export -f remover_adm
 export -f meu_ip
-}

@@ -1,13 +1,8 @@
 #!/bin/bash
-
-
-
-
-kaka(){
 #user=$(echo ${saks:0:5})
 
 # NUNCA  DEJES DE APRENDER
-# POWER BY @CHUMOGH
+# POWER BY @drowkid01
 
 cco=1
 [[ -e /bin/ejecutar/limFIX ]] && _limTOP="$(cat < /bin/ejecutar/limFIX)" || _limTOP='1'
@@ -27,7 +22,7 @@ ul="\033[1;33m( \033[1;32mALL UNLOCK \033[1;33m)"
 fi
 [[ -z $(echo -e ${_ps} | grep "ultimatebot" | grep -v "grep") ]] && bt="\033[1;31mOFF\033[0m" || bt="\033[1;32mON\033[0m"
 var_sks1=$(echo -e ${_ps} | grep "checkuser" | grep -v grep >/dev/null && echo -e "\033[1;32mON\033[0m" || echo -e "\033[1;31mOFF\033[0m")
-echo -e "${cor[2]} 🙎‍ ${cor[5]}CUENTAS SSH / SSL / DROPBEAR By @ChumoGH 🙎‍"
+echo -e "${cor[2]} 🙎‍ ${cor[5]}CUENTAS SSH / SSL / DROPBEAR By @drowkid01 🙎‍"
 msg -bar
 echo -e "  \033[1;34m ▸ M LIBRE: \033[1;32m${mem_free}  \033[1;34m ▸ USO DE CPU:\033[1;32m ${cpu_used} "
 msg -bar
@@ -742,7 +737,7 @@ msg -bar
 meu_ip
 valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")
 datexp=$(date "+%d/%m/%Y" -d " +$daysrnf days")
-[[ -e /bin/ejecutar/token ]] && passTOKEN=$(less /bin/ejecutar/token) || passTOKEN="ChumoGHPlus"
+[[ -e /bin/ejecutar/token ]] && passTOKEN=$(less /bin/ejecutar/token) || passTOKEN="drowkid01Plus"
 if useradd -M -s /bin/false $hwid -e $valid ; then
 (echo $passTOKEN; echo $passTOKEN)|passwd $hwid 2>/dev/null
 echo "$hwid 1" >>/root/usuarios.db
@@ -1596,7 +1591,7 @@ nano /bin/ejecutar/bannerssh
 cat /bin/ejecutar/bannerssh > /etc/bannerssh
 rm /bin/ejecutar/bannerssh
 fun_bar
-#[[ ! -e /root/name ]] && credi="@ChumoGH" || credi=$(cat < /root/name)
+#[[ ! -e /root/name ]] && credi="@drowkid01" || credi=$(cat < /root/name)
 #echo '<p style="text-align: center;"><strong><span style="color: #FF00FF;">'$(cat /bin/ejecutar/menu_credito)'&reg;</span> |&nbsp;</strong><span style="color: #483D8B;"><strong>'$credi'</strong></span></p>' >> /etc/bannerssh
 [[ -d /etc/dropbear ]] && {
 [[ -e /etc/bannerssh ]] && cat /etc/bannerssh > /etc/dropbear/banner
@@ -1852,10 +1847,10 @@ read -p " [ s | n ]: " sin_nao
  break
  fi
 done
-[[ -e /root/name ]] && credi=$(cat < /root/name) || credi="@ChumoGH"
+[[ -e /root/name ]] && credi=$(cat < /root/name) || credi="@drowkid01"
 credit=$(cat < /bin/ejecutar/menu_credito | head -1)
 echo -e '<p style="text-align: center;"><strong><span style="color: #FF00FF;">'" $credit "'&reg;</span> |&nbsp;</strong><span style="color: #483D8B;"><strong>'"$credi"'</strong></span></p>' >> /etc/bannerssh
-#echo '<font color="#FF00FF">© 2020 ChumoGH, &reg</font>' >> /etc/bannerssh
+#echo '<font color="#FF00FF">© 2020 drowkid01, &reg</font>' >> /etc/bannerssh
 [[ -d /etc/dropbear ]] && {
 [[ -e /etc/bannerssh ]] && cat /etc/bannerssh > /etc/dropbear/banner
 } || men="NO EXISTE DROPBEAR"
@@ -1921,7 +1916,7 @@ tput cuu1 && tput dl1
 tput cuu1 && tput dl1
 
 msg -bar
-echo -e "\e[97m\033[1;41m PROYECTOS V2RAY REFACTORIZADO By @ChumoGH  11-12-2022  \033[0m" 
+echo -e "\e[97m\033[1;41m PROYECTOS V2RAY REFACTORIZADO By @drowkid01  11-12-2022  \033[0m" 
 msg -bar
 echo -ne "\033[1;37m 
  1)- V2ray Manager UNIVERSAL
@@ -2042,4 +2037,3 @@ source /etc/adm-lite/usercodes
 
 ;;
 esac
-}

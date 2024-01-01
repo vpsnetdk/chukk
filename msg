@@ -1,16 +1,21 @@
 #!/bin/bash
-sdir="."
+# menu maker (opciones 1, 2, 3,.....)
+#HOLA
 
-dir="/etc/chukk";soporte="@drowkid01"
+flech='➮' cOlM='⁙' && TOP='‣' && TTini='=====>>►► 🐲' && cG='/c' && TTfin='🐲 ◄◄<<=====' && TTcent='💥' && RRini='【  ★' && RRfin='★  】' && CHeko='✅' && ScT='🛡️' && FlT='⚔️' && BoLCC='🪦' && ceLL='🧬' && aLerT='⚠️' && _kl1='ghkey' && lLaM='🔥' && pPIniT='∘' && bOTg='🤖' && kL10='tc' && rAy='⚡' && tTfIn='】' && TtfIn='【' tTfLe='►' && am1='/e' && rUlq='🔰' && h0nG='🍄' && lLav3='🗝️' && m3ssg='📩' && pUn5A='⚜' && p1t0='•' nib="${am1}${kL10}"
+cOpyRig='©' && mbar2=' •••••••••••••••••••••••'
 
-declare -A file=( [caca]="cabecalho" [tools]=ferramentas [menu]=menu [ress]=menu_credito [protocolos]=menu_inst [exec]=msg [pay]=payloads [ss]="shadowsocks.sh" [ult]="ultrahost" [usr]="usercodes" [version]="v-local.log" )
-declare -A cor=( [0]="\033[0m" [1]="\033[1;34m" [2]="\033[1;32m" [3]="\033[1;37m" [4]="\033[1;36m" [5]="\033[1;33m" [6]="\033[1;35m" )
+_check1=$5
+_check2=$6
+_check3=$7
+_check4=$8
+_check5=$9
 
 menu_func(){
   local options=${#@}
   local array
-  for((num=1; num<=$options; num++)); do #    echo -ne "$(msg -verd " [$num]") $(msg -verm2 ">") "
-	echo -ne " \e[1;30m[\e[1;36m$num\e[1;30m] \e[1;32m ➤➤➤ "
+  for((num=1; num<=$options; num++)); do
+    echo -ne "$(msg -verd " [$num]") $(msg -verm2 ">") "
     array=(${!num})
     case ${array[0]} in
       "-vd") echo -e "\033[1;33m[!]\033[1;32m ${array[@]:1}";;
@@ -22,7 +27,8 @@ menu_func(){
   done
  }
 
-selection_fun(){
+
+selection_fun () {
 local selection="null"
 local range
 for((i=0; i<=$1; i++)); do range[$i]="$i "; done
@@ -33,6 +39,19 @@ tput cuu1 >&2 && tput dl1 >&2
 done
 echo $selection
 }
+
+
+in_opcion(){
+  unset opcion
+  if [[ -z $2 ]]; then
+      msg -nazu " $1: " >&2
+  else
+      msg $1 " $2: " >&2
+  fi
+  read opcion
+  echo "$opcion"
+}
+# centrado de texto
 print_center(){
   if [[ -z $2 ]]; then
     text="$1"
@@ -56,11 +75,23 @@ print_center(){
   done <<< $(echo -e "$text")
 }
 # titulos y encabesados
+title(){
+    clear
+    msg -bar
+    if [[ -z $2 ]]; then
+      print_center -azu "$1"
+    else
+      print_center "$1" "$2"
+    fi
+    msg -bar
+ }
+
+# finalizacion de tareas
  enter(){
   msg -bar
   text="►► Presione enter para continuar ◄◄"
   if [[ -z $1 ]]; then
-    print_center -ama "\e[1;30m$text"
+    print_center -ama "$text"
   else
     print_center "$1" "$text"
   fi
@@ -78,7 +109,7 @@ msg () {
 local colors="/etc/new-adm-color"
 if [[ ! -e $colors ]]; then
 COLOR[0]='\033[1;37m' #BRAN='\033[1;37m'
-COLOR[1]='\e[1;30m' #VERMELHO='\e[31m'
+COLOR[1]='\e[31m' #VERMELHO='\e[31m'
 COLOR[2]='\e[32m' #VERDE='\e[32m'
 COLOR[3]='\e[33m' #AMARELO='\e[33m'
 COLOR[4]='\e[34m' #AZUL='\e[34m'
@@ -106,8 +137,8 @@ fi
 NEGRITO='\e[1m'
 SEMCOR='\e[0m'
  case $1 in
-  -ne) echo -ne " \e[1;30m[\e[1;36m•\e[1;30m] \e[1;36m$2 \e[1;32m";read $3 ;;
-  -ama) echo -e "\e[1;33m$2\e[0m" ;;	#  -ama) cor="${COLOR[3]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
+  -ne) cor="${COLOR[1]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}";;
+  -ama) cor="${COLOR[3]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
   -verm) cor="${COLOR[3]}${NEGRITO}[!] ${COLOR[1]}" && echo -e "${cor}${2}${SEMCOR}";;
   -verm2) cor="${COLOR[1]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
   -aqua) cor="${COLOR[8]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
@@ -125,9 +156,14 @@ SEMCOR='\e[0m'
   -blu) cor="${COLOR[9]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
   -blu1) cor="${COLOR[9]}" && echo -e "${cor}${2}${SEMCOR}";;
   -bar) ccor="${COLOR[1]}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && echo -e "${SEMCOR}${ccor}${SEMCOR}";;
-  -bar2) ccor="${COLOR[3]}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && echo -e "${SEMCOR}${ccor}${SEMCOR}";;
+  -bar1) ccor="${COLOR[1]}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && echo -e "${SEMCOR}${ccor}${SEMCOR}";;
+  -bar2) ccor="${COLOR[1]}=====================================================" && echo -e "${SEMCOR}${ccor}${SEMCOR}";;
+  -bar3) ccor="${COLOR[3]}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && echo -e "${SEMCOR}${ccor}${SEMCOR}";;
+  -bar4) ccor="${COLOR[5]}•••••••••••••••••••••••••••••••••••••••••••••••••" && echo -e "${SEMCOR}${ccor}${SEMCOR}";;
+  -br) ccor="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && echo -e "${ccor}";;
    esac
 }
+
 fun_bar () {
 comando[0]="$1"
 comando[1]="$2"
@@ -139,7 +175,7 @@ touch $HOME/fim
  ) > /dev/null 2>&1 &
 echo -ne "\033[1;33m ["
 while true; do
-   for((i=0; i<10; i++)); do
+   for((i=0; i<18; i++)); do
    echo -ne "\033[1;31m>>"
    sleep 0.1s
    done
@@ -153,3 +189,19 @@ done
 echo -e "\033[1;33m]\033[1;31m -\033[1;32m 100%\033[1;37m"
 }
 
+del(){
+  for (( i = 0; i < $1; i++ )); do
+    tput cuu1 && tput dl1
+  done
+}
+
+[[ -d /bin/ejecutar ]] && {
+[[ -e /bin/ejecutar/msg ]] || wget -q -O /bin/ejecutar/msg https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/msg-bar/msg 
+} || mkdir /bin/ejecutar
+cor[0]="\033[0m"
+cor[1]="\033[1;34m"
+cor[2]="\033[1;32m"
+cor[3]="\033[1;37m"
+cor[4]="\033[1;36m"
+cor[5]="\033[1;33m"
+cor[6]="\033[1;35m"

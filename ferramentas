@@ -1,7 +1,4 @@
 #!/bin/bash
-echo -e "\033[0;35m [\033[0;36m1\033[0;35m]\033[0;31m ➮${cor[3]} Bloqueo Torrent y Palabras Claves \033[0;33m( #BETA )"
-
-kaka(){
 start_menu () {
 source /etc/adm-lite/cabecalho
 echo -e "${cor[2]} ⌐╦╦═─ ${cor[5]} MENÚ HERRAMIENTAS By $(cat /etc/adm-lite/menu_credito|head -1)"
@@ -75,7 +72,7 @@ echo -e "${cor[4]} Este Script fue proyectado"
 echo -e "${cor[4]} Para Mejorar La Latencia"
 echo -e "${cor[4]} y velocidad del servidor!"
 msg -bar 
-echo -e "${cor[5]} ANALIZADO POR @ChumoGH"
+echo -e "${cor[5]} ANALIZADO POR @drowkid01"
 sleep 1s
 if [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]]; then
 #INSTALA
@@ -617,5 +614,3 @@ read -p " ¡Enter, para volver!"
 ;;
 esac
 done
-}
-

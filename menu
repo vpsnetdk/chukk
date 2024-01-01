@@ -1,12 +1,15 @@
 #!/bin/bash
 
-[[ ! -e "./msg" ]] && source <(curl -sSL https://www.dropbox.com/scl/fi/kszev35dy7qzyvpf4619b/msg?rlkey=pv5hhz7fx40panf2ihg8tu99w&dl=0) || source msg
+# NUNCA  DEJES DE APRENDER
+# POWER BY @drowkid01
 start_menu () {
-local mem_total=$(free --mega -h | awk 'NR==2{printf $2}') mem_used=$(free --mega -h | awk 'NR==2{printf $3}')
+local mem_total=$(free --mega -h | awk 'NR==2{printf $2}')
+local mem_used=$(free --mega -h | awk 'NR==2{printf $3}')
 local mem_free=$(free --mega -h | awk 'NR==2{printf $4}')
 local mem_cache=$(free --mega -h | awk 'NR==2{printf $6}')
 local mem_available=$(free --mega -h | awk 'NR==2{printf $7}') 
 local mem_used_percent=$(free --mega | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')
+    
 local swap=$(swapon -s)
 local swap_total=$(free --mega -h | awk 'NR==3{printf $2}')
 local swap_used=$(free  --mega -h | awk 'NR==3{printf $3}')
@@ -14,17 +17,26 @@ local swap_free=$(free  --mega -h | awk 'NR==3{printf $4}')
 local cpu_used="$(top -b -n1 | grep 'Cpu(s)' | awk '{print $2 + $4}')"%
 local _os="\033[1;31m$(cat /etc/issue | cut -d " " -f 1,2 | head -1| tr a-z A-Z)"
 local tmp_distro=($(lsb_release -d |cut -f2 | tr a-z A-Z))
+
 local distro="${tmp_distro[0]} ${tmp_distro[1]}"
 
+cor[0]="\033[0m"
+cor[1]="\033[1;34m"
+cor[2]="\033[1;32m"
+cor[3]="\033[1;37m"
+cor[4]="\033[1;36m"
+cor[5]="\033[1;33m"
+cor[6]="\033[1;35m"
+#SE CAMBIAN VARIABLES A ANTES DE LLENAR CACHE Y CPU ( MAQUILLAJE COMO OTROS MODS )
 source /etc/adm-lite/cabecalho "ports_"
-
+##
 [[ -z "$(cat /etc/crontab | grep 'ejecutar')" ]] && _opti="\033[0;31m [OFF]" || _opti="\033[0;31m [\033[0;32mON\033[0;31m]"
 [[ -e /etc/bash.bashrc-bakup ]] && _autorun="\033[0;31m [\033[0;32mON\033[0;31m] " || _autorun="\033[0;31m [OFF]"
 [[ -e /etc/systemd/system/killadm.service ]] && lmt="\033[0;31m [\033[0;32mON\033[0;31m] " || lmt="\033[0;31m [OFF]"
-msg -bar2
+msg -bar3
 echo -e "\033[1;34m ${TOP}\033[1;31m TOTAL:\033[1;32m ${mem_total}\033[1;34m ${TOP} \033[1;31m Libre:\033[1;32m ${mem_free} \033[1;34m ${TOP} \033[1;31m Usada:\033[1;32m ${mem_used}"
 echo -e "\033[1;34m ${TOP}\033[1;31m Uso RAM:\033[1;32m${mem_used_percent} \033[1;34m${TOP}\033[1;31m Uso CPU:\033[1;32m${cpu_used} \033[1;34m ${TOP}\033[1;31m Cache:\033[1;32m ${mem_cache}" # $CPU"%"
-msg -bar2
+msg -bar3
 echo -e "\033[0;35m [${cor[2]}01\033[0;35m]\033[0;33m ${flech}${cor[3]} CONTROL USUARIOS (SSH/SSL/VMESS) "
 echo -e "\033[0;35m [${cor[2]}02\033[0;35m]\033[0;33m ${flech}${cor[3]}  HERRAMIENTAS (\033[0;34mBad/VPN$_badvpn${cor[3]}) (\033[0;34mTCP-SPEED$_tcpspeed${cor[3]})"
 echo -e "\033[0;35m [${cor[2]}03\033[0;35m]\033[0;33m ${flech}${cor[3]}\033[0;33m [!]${cor[3]} OPTIMIZAR VPS ${_opti}"
@@ -33,10 +45,12 @@ echo -e "\033[0;35m [${cor[2]}06\033[0;35m]\033[0;33m ${flech}${cor[3]}  CONTADO
 echo -e "\033[0;35m [${cor[2]}07\033[0;35m]\033[0;33m ${flech}${cor[3]} \e[3;32mHERRAMIENTAS BETA\e[0m \033[0;33m (#EXPERIMENTAL)"
 echo -e "\033[0;35m [${cor[2]}08\033[0;35m]\033[0;33m ${flech}${cor[3]} AUTOINICIAR SCRIPT $_autorun"
 echo -e "\033[0;35m [${cor[2]}09\033[0;35m]\033[0;33m ${flech}${cor[3]} INSTALADOR DE PROTOCOLOS "
-msg -bar2
+msg -bar3 
 echo -ne "\033[0;35m [${cor[2]}10\033[0;35m]\033[0;33m ${flech}\033[0;33m [!] ${cor[2]}UPDATE / \033[0;31mREMOVE${cor[3]}  |" && echo -e " \033[0;35m [${cor[2]}0\033[0;35m]\033[0;33m ⇦ $(msg -bra "\e[3;33m[ SALIR ]\e[0m")"
-msg -bar2
+msg -bar3  
 }
+
+#FUNCION DE SELECCION
 fun_teste(){
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/funciones.sh)"
 }
@@ -75,7 +89,7 @@ trofix(){
 source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/mod-v2ray.sh)
 }
 autoop(){
-[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New ChumoGH${TTcent}VPS ${TTfin}      \033[0m"
+[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New drowkid01${TTcent}VPS ${TTfin}      \033[0m"
 echo -e "\033[1;37m  ${RRini} Reseller : $(cat < /bin/ejecutar/menu_credito) 2022 ${RRfin}\033[0m"
 msg -bar3 
 echo -e "${cor[2]} \033[1;32mESTA FUNCION AGREGARA EN EL CRONTAB UN AUTOEJECUCION"
@@ -95,7 +109,7 @@ clear&&clear && echo -e "${cor[0]}"
 return
 ;;
 1) clear&&clear
-[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New ChumoGH${TTcent}VPS ${TTfin}      \033[0m"
+[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New drowkid01${TTcent}VPS ${TTfin}      \033[0m"
 echo -e "\033[1;37m  ${RRini} Reseller : $(cat < /bin/ejecutar/menu_credito) 2022 ${RRfin}\033[0m"
 echo " Desabilitando Servicios de AutOptimizacion" && sed -i "/ejecutar/d" /etc/crontab
 echo -ne " VERIFICANDO SISTEMA......"
@@ -429,7 +443,7 @@ read -p " "
 }
 
 function mtraff(){
-[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New ChumoGH${TTcent}VPS ${TTfin}      \033[0m"
+[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New drowkid01${TTcent}VPS ${TTfin}      \033[0m"
 echo -e "\033[1;37m  ${RRini} Reseller : $(cat < /bin/ejecutar/menu_credito) 2022 ${RRfin}\033[0m"
 msg -bar3 
 echo -e "${cor[2]}  ⇜ Comsumo de INTERNET TOTAL EN VPS ⇝ ⇅"
@@ -470,7 +484,7 @@ return
 
 cambiopass () {
 clear&&clear
-[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New ChumoGH${TTcent}VPS ${TTfin}      \033[0m"
+[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New drowkid01${TTcent}VPS ${TTfin}      \033[0m"
 echo -e "\033[1;37m  ${RRini} Reseller : $(cat < /bin/ejecutar/menu_credito) 2022 ${RRfin}\033[0m"
 msg -bar3 
 echo -e ""
@@ -503,13 +517,13 @@ rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -q -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/nginx.conf"
 [[ ! -d /var/www/html ]] && mkdir -p /var/www/html
-[[ ! -e /var/www/html/index.html ]] && echo "<pre>Setup by @ChumoGH</pre>" > /var/www/html/index.html
+[[ ! -e /var/www/html/index.html ]] && echo "<pre>Setup by @drowkid01</pre>" > /var/www/html/index.html
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/vps.conf"
 /etc/init.d/nginx restart
 }
 
 verifi_fun () {
-[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New ChumoGH${TTcent}VPS ${TTfin}      \033[0m"
+[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New drowkid01${TTcent}VPS ${TTfin}      \033[0m"
 echo -e "\033[1;37m  ${RRini} Reseller : $(cat < /bin/ejecutar/menu_credito) 2022 ${RRfin}\033[0m"
 msg -bar3 
 echo -e ""
@@ -551,7 +565,7 @@ echo -ne "Desea Seguir? [S/N]: "; read kus
 /bin/killssh && echo " EJECUCION EXTOSA"
 msg -bar3
 echo -e '[Unit]
-Description=KillLogin Service by @ChumoGH
+Description=KillLogin Service by @drowkid01
 After=network.target
 StartLimitIntervalSec=0
 
@@ -627,7 +641,7 @@ do
 clear
 [[ -z "$(cat /etc/crontab | grep 'ejecutar')" ]] && _opti="\033[0;31m [OFF]" || _opti="\033[0;31m [\033[0;32mON\033[0;31m]"
 [[ -e /etc/systemd/system/killadm.service ]] && lmt="\033[0;31m [\033[0;32mON\033[0;31m] " || lmt="\033[0;31m [OFF]"
-[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New ChumoGH${TTcent}VPS ${TTfin}      \033[0m"
+[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New drowkid01${TTcent}VPS ${TTfin}      \033[0m"
 msg -bar3 
 echo -e "${cor[2]}  ${yYaN}  Menu de Administracion Herramientas BETA  ${yYaN} "
 msg -bar3 
@@ -658,7 +672,7 @@ case $ppp in
 	;;
 	1)
 		clear
-		[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New ChumoGH${TTcent}VPS ${TTfin}      \033[0m"
+		[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} New drowkid01${TTcent}VPS ${TTfin}      \033[0m"
 		echo -e "\033[1;37m  ${RRini} Reseller : $(cat < /bin/ejecutar/menu_credito) 2022 ${RRfin}\033[0m"
 		msg -bar3 
 		echo -e "
@@ -673,7 +687,7 @@ case $ppp in
 		case $opcao in
 		1)reiniciar_ser;;
 		2)
-		[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    =====>>►► 🐲 New ChumoGH💥VPS 🐲 ◄◄<<=====      \033[0m"
+		[[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    =====>>►► 🐲 New drowkid01💥VPS 🐲 ◄◄<<=====      \033[0m"
 echo -e "\033[1;37m      【      Reseller : $(cat < /bin/ejecutar/menu_credito) - ADM 2022       】\033[0m" 
 		echo -e "[\033[1;31m-\033[1;33m]\033[1;31m #######################################\033[1;33m"
 		echo -e "\033[1;37mSeleccione una opcion a desinstalar:    Para Salir Ctrl + C\033[1;33m
@@ -757,6 +771,7 @@ done
 
 
 #FUNCIONES
+while true; do
 start_menu
 unset lang
 selection=$(selection_fun 10)
@@ -794,7 +809,7 @@ fun_limpram() {
 	killall kswapd0 > /dev/null 2>&1
 	killall tcpdump > /dev/null 2>&1
 	killall ksoftirqd > /dev/null 2>&1
-	#echo -e "@ChumoGH " > /var/log/auth.log
+	#echo -e "@drowkid01 " > /var/log/auth.log
 	systemctl restart rsyslog.service
 	systemctl restart systemd-journald.service
 	service dropbear stop > /dev/null 2>&1
@@ -862,9 +877,14 @@ echo -e "\e[1;32m          --  AUTO INICIO ACTIVADO --"  | pv -qL 30
 msg -bar3 
 fi
 ;;
-9)source ${file[protocolos]};;
+9)
+export PATH=$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin:/usr/games
+value=$(vary_rex "2f6574632f61646d2d6c6974652f6d656e755f696e7374")
+${value}
+;;
 10)
 fun_atualizar
 ;;
 esac
+done
 

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-kaka(){
 subdom () {
 SUBDOM="$1"
 [[ "$SUBDOM" = "" ]] && return
@@ -81,4 +79,3 @@ iniciar $1 $2
 [[ $? = "0" ]] &&
 echo -e "\033[1;32mRegistro Generado en : $HOME/subresult\033[0m" &&
 echo -e "\033[1;31m====================================\033[0m"
-}
