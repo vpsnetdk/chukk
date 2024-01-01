@@ -36,7 +36,7 @@ echo $selection
 
 block_torrent () {
 msg -bar 
-source <(curl -sL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/blockT.sh)
+source <(curl -sL $url/blockT.sh)
 msg -bar 
 export PATH=$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin:/usr/games
 read -p " Presiona Enter para Continuar"
@@ -63,7 +63,7 @@ echo -e "${cor[4]}  BADVPN se instalará
  y así permitir el servicio de VideoLlamadas!"
 echo -e "${cor[5]} INICIANDO . . ."
 msg -bar 
-source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/ferramentas/budp.sh)
+source <(curl -sSL $url/budp.sh)
 }
 
 tcp_BBR () {
@@ -137,7 +137,7 @@ fi
 }
 
 fail_ban () {
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/ferramentas/fai2ban.sh)"
+bash -c "$(curl -fsSL $url/fai2ban.sh)"
 fail2ban-testcases -x start 2>/dev/null
 fail2ban-client -x start 2>/dev/null
 }

@@ -69,9 +69,9 @@ _tuser="\033[1;31m$(echo -e "${users}" | wc -l)"
 if ! [ $(id -u) = 0 ]; then
 clear
 		echo ""
-		msg -bar3
+		msg -bar
 		echo " 	       	⛑⛑⛑     Error Fatal!! x000e1  ⛑⛑⛑"
-		msg -bar3
+		msg -bar
 		echo "                ✠ Este script debe ejecutarse como root! ✠"
 		echo "                           Como Solucionarlo "
 		echo "                         Ejecute el script así:"
@@ -80,7 +80,7 @@ clear
 		echo "                               sudo su"
 		echo "                            Retornando . . ."
 		echo $(date)
-		msg -bar3
+		msg -bar
 		exit
 fi
 ##
@@ -89,7 +89,7 @@ fi
 
 #FIN DE MODULOS A ELIMINAR EN UPDATE CON REFORMA EN BASE	
 remover_adm () {
-msg -bar3
+msg -bar
 echo -e "${cor[5]} ¿ ESTAS SEGURO ?"
 read -p " [ s / n ]: " certe_za
 [[ "$certe_za" = @(s|S|y|Y) ]] && {
@@ -125,11 +125,11 @@ rm -f /root/.bashrc.cp /root/.bashrc.cp1
 echo -e "${cor[5]} SUCESS! :D${cor[0]}"
 [[ -e /etc/adm-lite ]] && rm -rf /etc/adm-lite
 echo -e "\033[0m"
- msg -bar3
+ msg -bar
  exit
   } || {
  echo -e "${cor[1]} DESINSTALACION CANCELADA POR EL USUARIO!! ${cor[0]}"
- msg -bar3
+ msg -bar
  return
  }
 }
@@ -185,7 +185,7 @@ funcao_verificacao () {
   rm -f /bin/ejecutar/usCONEXT
   rm -f /bin/ejecutar/usCONEXC
   echo " CONTADOR ONLINE DESACTIVADO !!"
-  msg -bar3
+  msg -bar
   read -p " PRESIONA ENTER PARA RETORNAR"
   return
     } || {
@@ -193,9 +193,9 @@ funcao_verificacao () {
   echo "VERIFICAR" > /etc/adm-lite/modulos 
 unset sshsn
 unset sin_nao
-msg -bar3
+msg -bar
 print_center -verm2 'ADVERTENCIA!!!\n ESTA FUNCION PODRIA CONSUMIR RECURSOS \n O CPU ELEVADO DEVIDO AL BUBLE DE VERIFICACION DE CONSUMO \n SI NOTA LENTITUD EN SU SERVIDOR \n DETENGALO INMEDIATAMENTE!!'
-msg -bar3
+msg -bar
 echo -e "${cor[3]} DESEAS ACTIVAR EL CONTROLADOR DE "
 echo -e "${cor[3]} TIEMPO - CUENTA EL TIEMPO DE CONEXION "
 echo -ne "${cor[3]} Esta SEGURO -> "
@@ -233,7 +233,7 @@ unset sin_nao
   echo -e " CONTADOR ONLINE ACTIVADO !!"
   echo -e " RECUERDA QUE PARA EL CONTROLADOR DE \n CONSUMO DE USUARIOS"
   echo -e " ES NECESARIO QUE TENGAS EL KILL MULTILOGIN ACTIVADO"
-  msg -bar3
+  msg -bar
   read -p " PRESIONA ENTER PARA RETORNAR"
   return
   }
@@ -243,7 +243,7 @@ unset sin_nao
 #LLENA USUARIO EN ARRAY $select_name DEL USUARIO
 select_users () {
 clear&&clear
-msg -bar3
+msg -bar
 echo -e "${cor[4]} $1 "
 # Obtener la lista de usuarios que cumplen con los criterios y extraer solo el nombre
 lista_usuarios=$(grep 'home' /etc/passwd | grep 'false' | grep -v 'syslog')
@@ -256,7 +256,7 @@ cantidad_usuarios=$(echo "$lista_nombres" | wc -l)
 mostrar_menu_numerado() {
     contador=1
     echo -e " - LISTA DE USUARIOS DISPONIBLES -"
-	msg -bar3
+	msg -bar
     while IFS= read -r nombre; do
         [[ -e /etc/adm-lite/userDIR/$nombre ]] && { 
 		local lmt="$(cat /etc/adm-lite/userDIR/$nombre | grep "limite" | awk '{print $2}')"
@@ -281,7 +281,7 @@ procesar_opcion() {
     opcion=$1
     if ((opcion >= 1 && opcion <= cantidad_usuarios)); then
         nombre=$(echo "$lista_nombres" | sed -n "${opcion}p")
-		msg -bar3
+		msg -bar
         echo " Seleccionaste el usuario: $nombre"
 		select_name=${nombre}
 		select_number=${opcion}
@@ -289,7 +289,7 @@ procesar_opcion() {
         # Agrega aquí el código que deseas ejecutar para el usuario seleccionado
     elif grep -Fxq "$opcion" <<< "$lista_nombres"; then
         numero=$(grep -nFx "$opcion" <<< "$lista_nombres" | cut -d: -f1)
-		msg -bar3
+		msg -bar
         echo " Seleccionaste el usuario: $opcion (número $numero)"
 		select_name=${opcion}
 		select_number=${numero}
@@ -302,14 +302,14 @@ return
 }
 
 while true; do
-    msg -bar3
+    msg -bar
     mostrar_menu_numerado
-	#msg -bar3
+	#msg -bar
     read -p " $(echo -e "${cor[5]} ESCRIBE (nombre o número) DEL USUARIO: ")" select_user
 	tput cuu1 && tput dl1
 	[[ ${select_user} = 0 ]] && break
     procesar_opcion "$select_user"
-	msg -bar3
+	msg -bar
 	echo -e "${cor[5]} $select_name - N° ${select_number}"
 	break
 done
@@ -360,7 +360,7 @@ fun_atualizar () {
 clear&&clear
 #upFILE=$(curl -sSL "https://www.dropbox.com/s/uyyme71yu6942vb/update.txt") 
 #echo -e "$upFILE"
-msg -bar3
+msg -bar
 cd /etc/adm-lite
 chmod 777 ./*
 echo -e "${cor[3]} ¿DESEAS CONTINUAR CON UPDATE DEL SCRIPT ? "
@@ -413,7 +413,7 @@ useradd -M -s /bin/false -d /home/ovpn/ $CLIENT -e $valid
 usermod -p $(openssl passwd -1 $senha) $CLIENT
 #Arquivo
   while [[ ${newfile} != @(s|S|y|Y|n|N) ]]; do
-	msg -bar3
+	msg -bar
    read -p "Crear Archivo OpenVPN? [S/N]: " -e -i S newfile
    tput cuu1 && tput dl1
   done
@@ -572,7 +572,7 @@ echo -e "$puertos"|column -s "|"  -t
 local PIDGEN=$(echo -e "${_ps}"| grep "BotGen.sh" | grep -v grep |awk '{print $1}')
 [[ ! -z $PIDGEN ]] && {
 local botG="\033[1;34m ${pPIniT} \033[1;37m BotGen Telegram 🤖 : \033[1;31m ⚡ ACTIVO ⚡"
-msg -bar3
+msg -bar
 echo -e "$botG"
 unset svcs porta puertos i x
 }
@@ -586,13 +586,13 @@ declare -A cpu_model=$(uname -m)
 [[ $v1 = $v2 ]] && vesaoSCT="\033[1;37m Key: $exitokey 】\033[0m\033[0;33m($v2)" || vesaoSCT="\033[1;37m Key: $exitokey 】\033[0m\033[0;33m($v2) ► \033[1;32m[$v1]\033[1;31m"
 meu_ip
 [[ -e /root/name ]] && figlet -p -f smslant < /root/name | lolcat || echo -e "\033[7;49;35m    ${TTini} ChumoGH${TTcent}VPS  ${TTfin}      "
-msg -bar3
+msg -bar
 [[ -e /etc/adm-lite/modulos ]] && echo -e "${cor[2]} ${pPIniT} \033[1;37mONLINES: ${_onlin}${cor[2]} ${pPIniT} \033[1;37mEXP: ${_userexp} ${cor[2]}${pPIniT}\033[1;37m KILL: $ukk ${cor[2]}${pPIniT}\033[1;37m TOTAL: ${_tuser}"
 echo -e "${cor[2]} ${pPIniT} \033[1;37mS.O: ${_os} ${cor[2]}${pPIniT} \033[1;37mBase:\033[1;31m${cpu_model} ${cor[2]}${pPIniT} \033[1;37mCores:\033[1;31m ${cpu_core} "
 echo -e "${cor[2]} ${pPIniT} \033[1;37mIP:\033[1;31m ${IP} ${cor[2]}${pPIniT} \033[1;37mFECHA: \033[1;31m$(date +"%d/%m/%Y")-$(date +"%H:%M")" 
-msg -bar3
+msg -bar
 echo -e "${vesaoSCT} "
-msg -bar3
+msg -bar
 [[ $1 = "ports_" ]] && ports_
 export -f ports_
 export -f ofus
